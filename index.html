@@ -1,86 +1,188 @@
 <!DOCTYPE html>
-<html lang="en" >
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Landing Page</title>
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400italic,700italic' rel='stylesheet' type='text/css'>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<title>Darshani Persadh</title>
 
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:400,700'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Playfair+Display:400italic,700italic'>
+<style>
+body {
+    margin: 0;
+    background: #0b0f14;
+    color: #e5e7eb;
+    font-family: ui-serif, Georgia, serif;
+}
 
-      <link rel="stylesheet" href="css/style.css">
+/* layout */
+.wrap {
+    display: flex;
+}
 
+/* sidebar */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    position: fixed;
+    padding: 28px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.sidebar h3 {
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.sidebar a {
+    display: block;
+    margin: 10px 0;
+    color: #9ca3af;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.sidebar a:hover {
+    color: #ffffff;
+}
+
+/* content */
+.content {
+    margin-left: 260px;
+    max-width: 860px;
+    padding: 70px 40px;
+}
+
+h1 {
+    font-size: 42px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 50px;
+}
+
+.section {
+    margin-bottom: 34px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.title {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #e5e7eb;
+}
+
+.text {
+    color: #9ca3af;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+/* widgets */
+.widget {
+    margin-top: 14px;
+    padding: 10px 0;
+}
+
+.kicker {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+
+.value {
+    font-size: 18px;
+    margin-top: 4px;
+}
+
+.meta {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 4px;
+}
+</style>
 </head>
 
 <body>
 
-  <html>
-    <head>
-        <meta charset="UTF-8"/>
-    </head>
+<div class="wrap">
 
-    <body>
-        <div class="container">
-            <div class="container__item landing-page-container">
-                <div class="content__wrapper">
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h3>Darshani Persadh</h3>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#field">Live Systems</a>
+</div>
 
-                    <header class="header">
-                        <div class="menu-icon header__item">
-                            <span class="menu-icon__line"></span>
-                        </div>
+<!-- CONTENT -->
+<div class="content">
 
-                        <h1 class="heading header__item">D-UI</h1>
+    <h1>Dr Darshani Persadh</h1>
+    <div class="subtitle">
+        AI Systems Builder · Quantum AgriTech Research · Distributed Intelligence Architect
+    </div>
 
-                        <ul class="social-container header__item">
-                            <li class="social__icon social__icon--fb">
-                                <img src="https://s29.postimg.org/3ldyta4qb/image.png" alt="facebook">
-                            </li>
-                            <li class="social__icon social__icon--dr">
-                                <img src="https://s29.postimg.org/vqltn8fhv/image.png" alt="dribbble">
-                            </li>
-                            <li class="social__icon social__icon--in">
-                                <img src="https://s29.postimg.org/p1fa77u5v/image.png" alt="instagram">
-                            </li>
-                        </ul>
-                    </header>
+    <!-- ABOUT -->
+    <div class="section" id="about">
+        <div class="title">About</div>
+        <div class="text">
+            <!-- Replace with your LinkedIn About section -->
+            I am currently designing and deploying AI-driven agricultural intelligence systems that merge edge computation,
+            distributed sensing, and applied machine learning into field-ready infrastructure.
+        </div>
+    </div>
 
-                    <p class="coords">N 49° 16' 35.173"  /  W 0° 42' 11.30"</p>
+    <!-- EXPERIENCE -->
+    <div class="section" id="experience">
+        <div class="title">Experience</div>
 
-                    <div class="ellipses-container">
-
-                        <h2 class="greeting">Hello</h2>
-
-                        <div class="ellipses ellipses__outer--thin">
-
-                            <div class="ellipses ellipses__orbit"></div>
-
-                        </div>
-
-                        <div class="ellipses ellipses__outer--thick"></div>
-                    </div>
-
-                    <div class="scroller">
-                        <p class="page-title">home</p>
-
-                        <div class="timeline">
-                            <span class="timeline__unit"></span>
-                            <span class="timeline__unit timeline__unit--active"></span>
-                            <span class="timeline__unit"></span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
+        <div class="text">
+            <b>DARJYO</b> · Technical Co-Founder / Engineer<br/>
+            <span style="color:#6b7280;">AgriTech & AI Infrastructure</span><br/>
+            Building distributed agricultural intelligence systems across sensing and inference layers.
         </div>
 
-    </body>
-</html>
-  
-</body>
+        <br/>
 
+        <div class="text">
+            <b>Research & Development</b><br/>
+            Designing applied ML systems for environmental and agricultural optimisation.
+        </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="section" id="skills">
+        <div class="title">Skills</div>
+        <div class="text">
+            AI Systems · Machine Learning · LLMs · Edge · Quantum Computing · AgriTech · Distributed Systems · Data Engineering
+        </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="section" id="projects">
+        <div class="title">Projects</div>
+
+        <div class="text">
+            <b>DARJYO Field Intelligence System</b><br/>
+            End-to-end agricultural intelligence pipeline combining sensor data, satellite signals, and model inference.
+        </div>
+    </div>
+
+  </div>
+</div>
+
+
+</body>
 </html>
