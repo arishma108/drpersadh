@@ -1,79 +1,227 @@
-<!-- MAIN -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Darshani Persadh</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --text: #111111;
+    --muted: #666666;
+    --faint: #aaaaaa;
+    --rule: #eaeaea;
+    --bg: #ffffff;
+
+    --space-1: 6px;
+    --space-2: 12px;
+    --space-3: 18px;
+    --space-4: 28px;
+    --space-5: 44px;
+    --space-6: 72px;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* LAYOUT */
+.wrap {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: var(--space-5) var(--space-4);
+    border-right: 1px solid var(--rule);
+}
+
+.brand {
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--space-4);
+}
+
+.sidebar a {
+    display: block;
+    margin: var(--space-2) 0;
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color: var(--text);
+}
+
+/* CONTENT */
+.content {
+    max-width: 860px;
+    padding: var(--space-6) var(--space-5);
+}
+
+h1 {
+    font-size: 44px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    margin: 0 0 var(--space-2) 0;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: var(--space-5);
+}
+
+.section-title {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--space-4);
+}
+
+/* TIMELINE */
+.timeline {
+    position: relative;
+    padding-left: 28px;
+    border-left: 1px solid var(--rule);
+}
+
+.node {
+    position: relative;
+    margin-bottom: var(--space-6);
+}
+
+.node-marker {
+    position: absolute;
+    left: -34px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--text);
+    opacity: 0.35;
+}
+
+.node-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.node-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: var(--space-1);
+}
+
+.node-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-top: var(--space-2);
+    max-width: 72ch;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="brand">Darshani Persadh</div>
+
+    <a href="https://arishma108.github.io/drpersadh.github.io/">About</a>
+    <a href="https://arishma108.github.io/drpersadh.github.io/blog.html">Blog</a>
+</div>
+
+<!-- CONTENT -->
 <div class="content">
 
     <h1>DARSHANI .R. PERSADH</h1>
-    <div class="subtitle">
-        Software Engineer
-    </div>
+    <div class="subtitle">Software Engineer</div>
 
-    <!-- TIMELINE: JPMorgan -->
-    <div class="section" id="experience">
+    <div class="section-title">JPMorgan Chase & Co. — Engineering Apprenticeship Log</div>
 
-        <div class="section-title">JPMorgan Chase & Co.</div>
+    <div class="timeline">
 
-        <!-- Month 6 -->
-        <div class="item">
-            <div class="item-title">Month 6</div>
-            <div class="item-meta">The Final Project</div>
-            <div class="item-text">
-                My apprenticeship is almost over. For the final month I was given a small internal project: build a dashboard that visualises system metrics for one of our services. It pulls data from logs and displays response times, error counts, and transaction volumes. Nothing revolutionary but it solves a real problem for the team. When I presented it during our review session, one of the senior engineers said something that stuck with me: “Good engineering isn’t about writing brilliant code. It’s about making systems easier for everyone else to understand.” Six months ago I came in thinking software engineering was about algorithms and elegant solutions. Now I see it differently, it’s all about trust. Trust that the system will run tonight, tomorrow, and ten years from now. And if it doesn’t, someone will read the logs, trace the code, and quietly fix the problem.
+        <div class="node">
+            <div class="node-marker"></div>
+            <div class="node-title">Month 6 — The Final Project</div>
+            <div class="node-meta">System observability dashboard</div>
+            <div class="node-text">
+                Built a dashboard visualising system metrics from logs: response times, error counts, transaction volumes. Simple in concept, powerful in impact. A senior engineer reminded me: good engineering is not brilliance, it is clarity for everyone else.
             </div>
         </div>
 
-        <div class="rule"></div>
-
-        <!-- Month 5 -->
-        <div class="item">
-            <div class="item-title">Month 5</div>
-            <div class="item-meta">Logs, Logs, and More Logs</div>
-            <div class="item-text">
-                If someone asked me what I’ve learned most about software engineering this month, the answer would be simple: logs tell stories. I spent several days tracing a performance issue where a service suddenly slowed during peak hours. The culprit wasn’t obvious. CPU looked fine and DB queries seemed normal. Eventually the team discovered an inefficient query triggered only when a certain dataset exceeded a threshold. A rare edge case. I helped rewrite part of the query and add monitoring so we’d catch it earlier next time. This kind of work feels like detective work, like I am patiently following clues through thousands of lines of logs until the system tells me what went wrong.
+        <div class="node">
+            <div class="node-marker"></div>
+            <div class="node-title">Month 5 — Logs, Logs, and More Logs</div>
+            <div class="node-meta">Performance investigation cycle</div>
+            <div class="node-text">
+                Traced a production slowdown that only appeared under specific dataset thresholds. CPU and queries looked fine until the edge case revealed itself. We fixed it and added monitoring. This is forensic engineering, not coding.
             </div>
         </div>
 
-        <div class="rule"></div>
-
-        <!-- Month 4 -->
-        <div class="item">
-            <div class="item-title">Month 4</div>
-            <div class="item-meta">Inside the Machine</div>
-            <div class="item-text">
-                This month I started joining the team’s sprint meetings. It’s fascinating watching engineers and business analysts talk about software in terms of risk, compliance, and performance rather than just features. One small change to a transaction processing service triggers conversations about audit logs, regulatory implications, and system resilience. I’m now writing small modules within a larger Java application. Nothing mission-critical, but enough that I have to think about edge cases. The biggest lesson this month: production systems behave differently from neat little university projects. In the real world, systems run 24 hours a day, process enormous volumes of data, and must recover gracefully when something inevitably breaks. Engineering here feels less like coding and more like maintaining a living organism.
+        <div class="node">
+            <div class="node-marker"></div>
+            <div class="node-title">Month 4 — Inside the Machine</div>
+            <div class="node-meta">Enterprise system thinking</div>
+            <div class="node-text">
+                Sprint meetings exposed the real world of engineering: risk, compliance, system resilience. Small code changes trigger architectural conversations. Production systems behave like living organisms, not textbooks.
             </div>
         </div>
 
-        <div class="rule"></div>
-
-        <!-- Month 3 -->
-        <div class="item">
-            <div class="item-title">Month 3</div>
-            <div class="item-meta">First Real Bug Fix</div>
-            <div class="item-text">
-                Today I fixed my first production issue. Well, “fixed” might be generous. A small bug in an internal reporting tool was causing incorrect totals to appear in a dashboard. The problem turned out to be a database query that wasn’t handling null values correctly. Classic SQL. I remember staring at the log files for almost an hour before the pattern clicked. After pushing the fix and watching it deploy to staging, the system ran clean. No errors. Correct totals. It wasn’t dramatic. No celebration. Just a quiet nod from my mentor and a note in the ticket system saying the issue was resolved. Still, walking home that evening felt different, something I wrote had quietly corrected a financial reporting error. That’s a strange kind of responsibility.
+        <div class="node">
+            <div class="node-marker"></div>
+            <div class="node-title">Month 3 — First Real Bug Fix</div>
+            <div class="node-meta">Production incident resolution</div>
+            <div class="node-text">
+                Fixed incorrect reporting caused by null handling in SQL. No celebration, just correctness restored. But there is weight in knowing your code touched financial truth.
             </div>
         </div>
 
-        <div class="rule"></div>
-
-        <!-- Month 2 -->
-        <div class="item">
-            <div class="item-title">Month 2</div>
-            <div class="item-meta">Hello World, but Corporate</div>
-            <div class="item-text">
-                This month I finally started writing code. Nothing glamorous just some small scripts and a few tiny fixes. My first task was debugging a training module that intentionally had broken logic. The point wasn’t the bug, it was learning the workflow: pull the repository, replicate the issue, fix it, push a commit, wait for code review. Code reviews here are serious business. Every line gets questioned, not aggressively, but thoughtfully. Why this variable name? Why this query structure? Could this break under load? It’s like an apprenticeship in thinking, not just coding. Somewhere in the process I realised something else: software engineering inside a bank is less about cleverness and more about reliability. Nobody applauds flashy code. They respect code that simply never fails.
+        <div class="node">
+            <div class="node-marker"></div>
+            <div class="node-title">Month 2 — Corporate Hello World</div>
+            <div class="node-meta">Workflow immersion</div>
+            <div class="node-text">
+                Learned the real workflow: pull, reproduce, fix, commit, review. Code reviews were less about approval and more about reasoning. Reliability beats cleverness every time.
             </div>
         </div>
 
-        <div class="rule"></div>
-
-        <!-- Month 1 -->
-        <div class="item">
-            <div class="item-title">Month 1</div>
-            <div class="item-meta">The Quiet Shock of Scale</div>
-            <div class="item-text">
-                Day one inside JPMorgan Chase & Co. and I’m already realising something: nothing in our textbooks prepares you for the sheer scale of enterprise systems. The first week was mostly orientation. Security briefings, compliance policies, and an introduction to internal systems that look like they’ve evolved layer by layer over decades. It’s a strange mix of old and new. My workstation setup alone took two days. Internal repositories, access permissions, VPN tunnels, build tools. Banking software doesn’t trust you until you prove you deserve the access. I spent most of this week shadowing a senior engineer reading through code that processes transactions. Not writing anything yet, just observing how everything connects. It felt like being allowed to walk through the engine room before anyone expects you to steer the ship.
+        <div class="node">
+            <div class="node-marker"></div>
+            <div class="node-title">Month 1 — The Quiet Shock of Scale</div>
+            <div class="node-meta">System onboarding</div>
+            <div class="node-text">
+                Enterprise systems revealed themselves immediately: layered architectures, strict access control, decades of evolution. I spent most of the time observing senior engineers inside production systems before writing anything.
             </div>
         </div>
 
     </div>
+
 </div>
+</div>
+
+</body>
+</html>
