@@ -4,51 +4,57 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Darshani Persadh</title>
+<title>Darshani Persadh · Blog</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Source Sans Pro (clean academic) + Merriweather for subtle serif -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
 <style>
 
 /* -----------------------------
-   BASE SYSTEM 
+   BASE SYSTEM (grayscale, academic)
 ----------------------------- */
 
 :root {
-    --text: #111111;
-    --muted: #666666;
-    --faint: #aaaaaa;
-    --rule: #eaeaea;
+    --text: #1a1a1a;
+    --muted: #5a5e6a;
+    --faint: #8e929e;
+    --rule: #e6e9ef;
     --bg: #ffffff;
+    --sidebar-bg: #fefefc;
 
     --space-1: 6px;
     --space-2: 12px;
     --space-3: 18px;
     --space-4: 28px;
     --space-5: 44px;
-    --space-6: 72px;
+    --space-6: 64px;
 }
 
 body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: "Source Sans Pro", system-ui, -apple-system, sans-serif;
+    font-family: 'Source Sans Pro', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
 }
 
 /* -----------------------------
-   GRID STRUCTURE
+   GRID STRUCTURE (two-column)
 ----------------------------- */
 
 .wrap {
     display: grid;
     grid-template-columns: 260px 1fr;
     min-height: 100vh;
+    max-width: 1300px;
+    margin: 0 auto;
+    background: var(--bg);
 }
 
 /* -----------------------------
-   SIDEBAR (TOC STYLE)
+   SIDEBAR (sticky, TOC style)
 ----------------------------- */
 
 .sidebar {
@@ -57,35 +63,55 @@ body {
     height: 100vh;
     padding: var(--space-5) var(--space-4);
     border-right: 1px solid var(--rule);
+    background: var(--sidebar-bg);
 }
 
 .brand {
     font-size: 11px;
-    letter-spacing: 1.4px;
+    letter-spacing: 1.6px;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-5);
+    font-weight: 500;
 }
 
-.sidebar a {
-    display: block;
-    margin: var(--space-2) 0;
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-links a {
     font-size: 14px;
     color: var(--muted);
     text-decoration: none;
+    transition: color 0.1s;
+    padding: 4px 0;
+    border-left: 2px solid transparent;
+    padding-left: 8px;
 }
 
-.sidebar a:hover {
+.nav-links a:hover {
     color: var(--text);
+    border-left-color: #b0b5c0;
+}
+
+.sidebar-footer {
+    margin-top: var(--space-6);
+    font-size: 11px;
+    color: var(--faint);
+    border-top: 1px solid var(--rule);
+    padding-top: var(--space-3);
 }
 
 /* -----------------------------
-   MAIN CONTENT COLUMN
+   MAIN CONTENT COLUMN (reading width)
 ----------------------------- */
 
 .content {
-    max-width: 820px;
+    max-width: 780px;
     padding: var(--space-6) var(--space-5);
+    background: white;
 }
 
 /* -----------------------------
@@ -93,34 +119,66 @@ body {
 ----------------------------- */
 
 h1 {
-    font-size: 44px;
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    margin: 0 0 var(--space-2) 0;
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-1) 0;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .subtitle {
-    font-size: 14px;
+    font-size: 0.9rem;
     color: var(--muted);
-    margin-bottom: var(--space-6);
-}
-
-.section {
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-5);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: var(--space-2);
 }
 
 .section-title {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: var(--space-3);
-    color: var(--text);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: var(--space-2);
+    color: #6e7683;
 }
 
-.text {
-    font-size: 15px;
-    line-height: 1.75;
+.item {
+    margin-bottom: var(--space-5);
+}
+
+.item-meta {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #8c94a0;
+    margin-bottom: var(--space-1);
+}
+
+.item-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: var(--space-2);
+}
+
+.item-text {
+    font-size: 0.95rem;
     color: var(--muted);
-    max-width: 72ch;
+    line-height: 1.65;
+    margin-top: var(--space-2);
+}
+
+.text-list {
+    margin-top: var(--space-2);
+    padding-left: 1.2rem;
+}
+
+.text-list li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+    line-height: 1.5;
 }
 
 .rule {
@@ -129,202 +187,184 @@ h1 {
     margin: var(--space-4) 0;
 }
 
-/* -----------------------------
-   EXPERIENCE BLOCKS
------------------------------ */
-
-.item {
-    margin-bottom: var(--space-4);
+hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: var(--space-4) 0;
 }
 
-.item-title {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text);
-}
-
-.item-meta {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: var(--space-1);
-}
-
-.item-text {
-    font-size: 14px;
-    color: var(--muted);
-    margin-top: var(--space-2);
-    line-height: 1.7;
-}
-
-/* -----------------------------
-   SMALL DATA WIDGETS
------------------------------ */
-
-.widget {
+.dateline {
+    font-size: 0.7rem;
+    color: var(--faint);
     margin-top: var(--space-3);
 }
 
-.kicker {
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+/* responsive */
+@media (max-width: 780px) {
+    .wrap {
+        grid-template-columns: 1fr;
+    }
+    .sidebar {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--rule);
+        padding: var(--space-4);
+    }
+    .content {
+        padding: var(--space-4);
+    }
+}
+
+.back-link {
+    font-size: 0.8rem;
+    margin-bottom: var(--space-4);
+    display: inline-block;
     color: var(--muted);
+    text-decoration: none;
 }
 
-.value {
-    font-size: 18px;
-    margin-top: var(--space-1);
-}
-
-.meta {
-    font-size: 12px;
-    color: var(--faint);
-    margin-top: var(--space-1);
+.back-link:hover {
+    color: var(--text);
 }
 
 </style>
 </head>
-
 <body>
 
 <div class="wrap">
 
-<!-- SIDEBAR -->
-<div class="sidebar">
+<!-- SIDEBAR (sticky, minimal) -->
+<aside class="sidebar">
     <div class="brand">Darshani Persadh</div>
+    <div class="nav-links">
+        <a href="https://arishma108.github.io/drpersadh/">About</a>
+        <a href="https://arishma108.github.io/drpersadh/blog.html" style="color: #1a1a1a; border-left-color: #1a1a1a;">Blog</a>
+        <a href="#">Publications</a>
+        <a href="#">Contact</a>
+    </div>
+    <div class="sidebar-footer">
+        Software Engineer<br>
+        JPMorgan Chase & Co. (2009)<br>
+        now: Technical co-founder @ DARJYO
+    </div>
+</aside>
 
-    <a href="https://arishma108.github.io/drpersadh/">About</a>
-    <a href="https://arishma108.github.io/drpersadh/blog.html">Blog</a>
-</div>
-
-<!-- MAIN -->
-<div class="content">
-
-    <h1>DARSHANI .R. PERSADH</h1>
-    <div class="subtitle">Software Engineer</div>
-
-    <!-- Stack -->
-    <div class="section">
-        <div class="section-title">JPMorgan Chase & Co.</div>
-        <div class="item">
-           <div class="item-meta">Jan - Jun 2009</div>
-            <div class="item-title">Tech Stack</div>
-            <div class="text">
-           	<li>Java 
-		<li>C++ for trading/high-performance systems
-		<li>C#/.NET for internal applications
-		<li>Oracle / SQL databases
-		<li>Linux servers
-		<li>Spring
- </div>
+<!-- MAIN CONTENT: blog entries -->
+<main class="content">
+    <a href="https://arishma108.github.io/drpersadh/" class="back-link">← back to profile</a>
+    <h3>2009</h3>
+    <div class="subtitle">A software engineering apprenticeship journal</div>
+    <hr>
+    <!-- Tech stack section (original JPMorgan) -->
+    <div class="section-title">JPMorgan Chase & Co.</div>
+    <div class="item-meta">Jan - Jun 2009</div>
+    <div class="item-title">Tech Stack</div>
+    <ul class="text-list">
+        <li>Java</li>
+        <li>C++ for trading/high-performance systems</li>
+        <li>C#/.NET for internal applications</li>
+        <li>Oracle / SQL databases</li>
+        <li>Linux servers</li>
+        <li>Spring</li>
+    </ul>
+    
+	<!-- MONTH 6 (original first entry) -->
+    <div class="item">
+        <div class="item-meta">June 2009</div>
+        <div class="item-title">Month 6 - The FINAL Project</div>
+        <div class="item-text">
+            My apprenticeship is almost over. For the final month I was given a small internal project: build a dashboard that visualises system metrics for one of our services. It pulls data from logs and displays response times, error counts, and transaction volumes.
+            Nothing revolutionary but it solves a real problem for the team. When I presented it during our review session, one of the senior engineers said something that stuck with me: “Good engineering isn’t about writing brilliant code. It’s about making systems easier for everyone else to understand.”
+            Six months ago I came in thinking software engineering was about algorithms and solutions, now I see it differently. It’s about trust. Trust that the system will run tonight, tomorrow, and ten years from now. And if it doesn’t, someone will read the logs, trace the code, and quietly fix the problem.
         </div>
     </div>
 
     <div class="rule"></div>
 
-    <!-- MONTH 6 -->
-    <div class="item">
-       <div class="item-meta">June 2009</div>
-        <div class="item-title">Month 6 - The FINAL Project</div>
-        <div class="item-text">
-        My apprenticeship is almost over. For the final month I was given a small internal project: build a dashboard that visualises system metrics for one of our services. It pulls data from logs and displays response times, error counts, and transaction volumes.
-Nothing revolutionary but it solves a real problem for the team. When I presented it during our review session, one of the senior engineers said something that stuck with me: “Good engineering isn’t about writing brilliant code. It’s about making systems easier for everyone else to understand.”
-Six months ago I came in thinking software engineering was about algorithms and solutions, now I see it differently. It’s about trust. Trust that the system will run tonight, tomorrow, and ten years from now. And if it doesn’t, someone will read the logs, trace the code, and quietly fix the problem.
-</div>
-    </div>
-	<div class="rule"></div>
-
     <!-- MONTH 5 -->
     <div class="item">
-       <div class="item-meta">May 2009</div>
+        <div class="item-meta">May 2009</div>
         <div class="item-title">Month 5 - Logs, Logs, and More Logs</div>
-        
         <div class="item-text">
-        If someone asked me what I’ve learned most about software engineering this month, the answer would be simple: logs tell stories.
-I spent several days tracing a performance issue where a service suddenly slowed during peak hours. The culprit wasn’t obvious. CPU looked fine and DB queries seemed normal.
-Eventually the team discovered an inefficient query triggered only when a certain dataset exceeded a threshold. A rare edge case.
-I helped rewrite part of the query and add monitoring so we’d catch it earlier next time. This kind of work feels like detective work like I am patiently following clues through thousands of lines of logs until the system tells you what went wrong.
-</div>
+            If someone asked me what I’ve learned most about software engineering this month, the answer would be simple: logs tell stories.
+            I spent several days tracing a performance issue where a service suddenly slowed during peak hours. The culprit wasn’t obvious. CPU looked fine and DB queries seemed normal.
+            Eventually the team discovered an inefficient query triggered only when a certain dataset exceeded a threshold. A rare edge case.
+            I helped rewrite part of the query and add monitoring so we’d catch it earlier next time. This kind of work feels like detective work like I am patiently following clues through thousands of lines of logs until the system tells you what went wrong.
+        </div>
     </div>
 
     <div class="rule"></div>
 
     <!-- MONTH 4 -->
-    <div class="section">
-        <div class="item">
-           <div class="item-meta">April 2009</div>
-            <div class="item-title">Month 4 - Inside the Machine
-</div> <div class="item-text">
+    <div class="item">
+        <div class="item-meta">April 2009</div>
+        <div class="item-title">Month 4 - Inside the Machine</div>
+        <div class="item-text">
             This month I started joining the team’s sprint meetings.
-It’s fascinating watching engineers and business analysts talk about software in terms of risk, compliance, and performance rather than just features.
-One small change to a transaction processing service triggers conversations about audit logs, regulatory implications, and system resilience.
-I’m now writing small modules within a larger Java application. Nothing soo mission-critical, but enough that I have to think about edge cases.
-The biggest lesson this month: production systems behave differently from university projects.
-In the real world, systems run 24 hours a day, process enormous volumes of data, and must recover gracefully when something inevitably breaks.
-Engineering here feels less like coding and more like maintaining a living organism.
-</div>
+            It’s fascinating watching engineers and business analysts talk about software in terms of risk, compliance, and performance rather than just features.
+            One small change to a transaction processing service triggers conversations about audit logs, regulatory implications, and system resilience.
+            I’m now writing small modules within a larger Java application. Nothing so mission-critical, but enough that I have to think about edge cases.
+            The biggest lesson this month: production systems behave differently from university projects.
+            In the real world, systems run 24 hours a day, process enormous volumes of data, and must recover gracefully when something inevitably breaks.
+            Engineering here feels less like coding and more like maintaining a living organism.
         </div>
     </div>
 
     <div class="rule"></div>
 
     <!-- MONTH 3 -->
-    <div class="section">
-        <div class="item">
-           <div class="item-meta">March 2009</div>
-            <div class="item-title">Month 3 - First Real Bug Fix
-</div>
-           <div class="item-text">
-           Today I fixed my first production issue.
-Well, “fixed” might be generous. A small bug in an internal reporting tool was causing incorrect totals to appear in a dashboard.
-The problem turned out to be a database query that wasn’t handling null values correctly. Classic SQL, why does it always have to be an Excel or SQL issue with me!
-I remember staring at the log files for almost an hour before the pattern clicked.
-After pushing the fix and watching it deploy to staging, the system ran clean. No errors. Correct totals.
-It wasn’t dramatic, atleast I got a nod from my mentor and a note in the ticket system saying the issue was resolved.
-Still, going home this evening felt different, something I wrote had quietly corrected a financial reporting error. That’s a strange kind of responsibility.
- </div>
+    <div class="item">
+        <div class="item-meta">March 2009</div>
+        <div class="item-title">Month 3 - First Real Bug Fix</div>
+        <div class="item-text">
+            Today I fixed my first production issue.
+            Well, “fixed” might be generous. A small bug in an internal reporting tool was causing incorrect totals to appear in a dashboard.
+            The problem turned out to be a database query that wasn’t handling null values correctly. Classic SQL, why does it always have to be an Excel or SQL issue with me!
+            I remember staring at the log files for almost an hour before the pattern clicked.
+            After pushing the fix and watching it deploy to staging, the system ran clean. No errors. Correct totals.
+            It wasn’t dramatic, atleast I got a nod from my mentor and a note in the ticket system saying the issue was resolved.
+            Still, going home this evening felt different, something I wrote had quietly corrected a financial reporting error. That’s a strange kind of responsibility.
         </div>
     </div>
 
     <div class="rule"></div>
 
     <!-- MONTH 2 -->
-    <div class="section">
-        <div class="item">
-           <div class="item-meta">February 2009</div>
-            <div class="item-title">Month 2 - Hello World, but Corporate
-</div>
-           <div class="item-text">
-           This month I finally started writing code.
-Not anything glamorous. Small scripts with tiny fixes, its work sitting quietly in the background but keeps systems running smoothly.
-My first task was debugging a training module that intentionally had broken logic, so the point wasn’t the bug, it was learning the workflow: pull the repository, replicate the issue, fix it, push a commit, wait for code review.
-Code reviews here are serious business. Every line gets questioned. Not aggressively, but thoughtfully. Why this variable name? Why this query structure? Could this break under load?
-It’s like an apprenticeship in thinking, not just coding.
-Somewhere in the process I realised something else: software engineering inside a bank is less about cleverness and more about reliability.
-Nobodys applauding your flashy code. They respect code thats never failing.
- </div>
+    <div class="item">
+        <div class="item-meta">February 2009</div>
+        <div class="item-title">Month 2 - Hello World, but Corporate</div>
+        <div class="item-text">
+            This month I finally started writing code.
+            Not anything glamorous. Small scripts with tiny fixes, its work sitting quietly in the background but keeps systems running smoothly.
+            My first task was debugging a training module that intentionally had broken logic, so the point wasn’t the bug, it was learning the workflow: pull the repository, replicate the issue, fix it, push a commit, wait for code review.
+            Code reviews here are serious business. Every line gets questioned. Not aggressively, but thoughtfully. Why this variable name? Why this query structure? Could this break under load?
+            It’s like an apprenticeship in thinking, not just coding.
+            Somewhere in the process I realised something else: software engineering inside a bank is less about cleverness and more about reliability.
+            Nobody's applauding your flashy code. They respect code that's never failing.
         </div>
     </div>
 
     <div class="rule"></div>
 
     <!-- MONTH 1 -->
-    <div class="section">
-        <div class="item">
-           <div class="item-meta">January 2009</div>
-            <div class="item-title">Month 1 - The Quiet Shock of Scale
-</div>
-            <div class="item-text">
+    <div class="item">
+        <div class="item-meta">January 2009</div>
+        <div class="item-title">Month 1 - The Quiet Shock of Scale</div>
+        <div class="item-text">
             Day one inside JPMorgan Chase & Co. and I’m already realising something: nothing in textbooks prepares you for the sheer scale of enterprise systems.
-The first week has been mostly orientation. Security briefings, compliance policies, and an introduction to internal systems that look like they’ve evolved layer by layer over decades. It’s a strange mix of old and new. A Java service speaking to an Oracle database here, a C++ component quietly doing heavy lifting somewhere deeper in the stack.
-My workstation setup alone took two days. Internal repositories, access permissions, VPN tunnels, build tools. Banking software doesn’t trust you until you prove you deserve the access.
-I spent most of this week shadowing a senior engineer reading through code that processes transactions. Not writing anything yet, just observing how everything connects.
-It’s oddly comforting. Like being allowed to walk through the engine room before anyone expects you to steer the ship.
- </div>
+            The first week has been mostly orientation. Security briefings, compliance policies, and an introduction to internal systems that look like they’ve evolved layer by layer over decades. It’s a strange mix of old and new. A Java service speaking to an Oracle database here, a C++ component quietly doing heavy lifting somewhere deeper in the stack.
+            My workstation setup alone took two days. Internal repositories, access permissions, VPN tunnels, build tools. Banking software doesn’t trust you until you prove you deserve the access.
+            I spent most of this week shadowing a senior engineer reading through code that processes transactions. Not writing anything yet, just observing how everything connects.
+            It’s oddly comforting. Like being allowed to walk through the engine room before anyone expects you to steer the ship.
         </div>
     </div>
 
-</div>
+    <div class="dateline">
+        Written in 2009 · edited in arb moments for clarity · Darshani Persadh
+    </div>
+
+</main>
 
 </div>
 
