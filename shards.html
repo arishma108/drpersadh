@@ -402,25 +402,22 @@
 
     <!-- CENTER: main documentation with download stats -->
     <main class="doc-container">
-        <a href="https://arishma108.github.io/drpersadh/" class="back-link">← back to profile</a>
-    <hr>
         <h1 class="doc-title">persadian/DeepSeek-V4-Flash-GGUF</h1>
         <div class="doc-sub">Quantized 284B MoE · IQ1_S-XL · 2‑shard GGUF</div>
         <div class="stats-badge">
-            <span>▼ 985 downloads (last month)</span>
-            <span>▲ 799 in first 9h → +186 in 15h</span>
-            <span>⭐ community momentum</span>
+            <span>▼ 1350 downloads in 24 hours</span>
+            <span>▲ 77.4 TERABYTES transferred! 🤯</span>
         </div>
 
         <!-- Abstract section -->
         <div id="abstract" class="section">
             <h2>Abstract</h2>
-            <p>I, Darshani Persadh, present <strong>persadian/DeepSeek-V4-Flash-GGUF</strong>, a quantized Mixture-of-Experts language model derived from DeepSeek-V4-Flash. Using IQ1_S-XL quantization, the original 500GB FP8 checkpoint is compressed to <strong>61.5 GB (2 shards)</strong> — an ~88% reduction — while retaining 284B total parameters, 13B active per token, and a 1M token context window. The model is distributed as a dual‑shard GGUF file compatible with llama.cpp and required a custom V4‑aware fork.</p>
+            <p>I, Darshani Persadh, present <strong>persadian/DeepSeek-V4-Flash-GGUF</strong>, a quantized Mixture-of-Experts language model derived from DeepSeek-V4-Flash. Using IQ1_S-XL quantization, the original 500GB FP8 checkpoint is compressed to <strong>61.5 GB (2 shards)</strong>, an ~88% reduction, while retaining 284B total parameters, 13B active per token, and a 1M token context window. The model is distributed as a dual‑shard GGUF file compatible with llama.cpp and required a custom V4‑aware fork.</p>
             <div class="equation-block">
                 <span class="math-inline">Compression ratio = 500 GB / 61.5 GB ≈ 8.13x</span><br>
                 <span class="math-inline">Memory saved = 438.5 GB</span>
             </div>
-            <p><strong>Adoption metrics:</strong> 799 downloads within 9 hours of release, reaching 985 downloads within 24 hours, reflecting strong community interest in efficient MoE deployment.</p>
+            <p><strong>Adoption metrics:</strong> 799 downloads within 9 hours of release, reaching 1350 downloads within 24 hours, reflecting strong community interest in efficient MoE deployment.</p>
         </div>
 
         <!-- High-level overview -->
@@ -533,7 +530,10 @@
         <!-- validation -->
         <div id="validation" class="section">
             <h2>Validation & integrity</h2>
-            <p>Both shards are verified: GGUF header signature valid, shard detection working (<code>First shard (00001): True; Second shard (00002): True</code>). Model loads successfully on RTX 3090 with 64GB+ RAM. The custom <code>feat/v4-port-cuda</code> branch correctly resolves the V4 attention architecture.</p>
+            <p>Both shards are verified: GGUF header signature valid, shard detection working 
+			<li><code>First shard (00001): True; </li>
+			<li>Second shard (00002): True</code>. </li>
+			<br>Model loads successfully on RTX 3090 with 64GB+ RAM. The custom <code>feat/v4-port-cuda</code> branch correctly resolves the V4 attention architecture.</p>
         </div>
 
         <!-- citation -->
@@ -551,7 +551,25 @@
 
         <div id="sustainability" class="section">
             <h2>Environmental impact</h2>
-            <p>Total CO2 offset: 50 Kg · Reforestation code <code>9162366</code>.<br> Two‑shard distribution still reduces storage energy compared to FP8 baseline.</p>
+            <p>Total CO2 offset: 50 Kg · <code>Reforestation code 9162366.</code>. <br>Two‑shard distribution still reduces storage energy compared to FP8 baseline.</p>
+<!-- Climate Action -->
+<script src="https://widgets.tree-nation.com/js/widgets/v3/widgets.min.js"></script>
+<div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+ <div 
+        data-widget-type="offset-website" 
+        data-tree-nation-code="1d8861a9666f981e" 
+        data-lang="en" 
+        data-theme="light">
+</div>
+
+<div 
+        data-widget-type="tree-counter" 
+        data-tree-nation-code="c313900f1518ce55" 
+        data-lang="en" 
+        data-theme="light">
+    </div>
+</div>
+<!-- End Climate Action -->
         </div>
         <hr>
         <div class="footnote" style="text-align:center;">DeepSeek-V4-Flash-GGUF · Version 1.0 · 1350 downloads and rising</div>
@@ -574,7 +592,7 @@
         </ul>
         <div style="margin-top: 1.5rem; font-size:0.7rem; color:#8f94a0;">
             <span class="math-inline">Φ = 284B</span> &nbsp;|&nbsp; IQ1_S<br>
-            <span>▼ 985 downloads</span>
+            <span>▼ 1350 downloads</span>
         </div>
     </aside>
 </div>
