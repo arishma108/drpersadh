@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DFQS v1.0: DeepSeek Flash Quantization Standard | IEEE-Style Specification Paper</title>
+    <!-- Fonts: IEEE-style (Source Sans Pro + Merriweather for serif elegance) -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f9fc;
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+            color: #1a1a1a;
+        }
+
+        /* IEEE paper container: two-column layout (sidebar + main) but more classic spec */
+        .ieee-container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            background: #ffffff;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.03), 0 8px 30px rgba(0,0,0,0.05);
+            display: grid;
+            grid-template-columns: 260px 1fr;
+        }
+
+        /* LEFT: meta / toc / author (IEEE style sidebar) */
+        .spec-sidebar {
+            background: #fefefc;
+            border-right: 1px solid #e2e8f0;
+            padding: 2rem 1.5rem;
+        }
+
+        .doi-badge {
+            font-family: monospace;
+            font-size: 0.7rem;
+            background: #f0f2f5;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .spec-sidebar h2 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #8a9bb0;
+            margin: 1.2rem 0 0.6rem 0;
+            border-bottom: 1px solid #eaeef2;
+            padding-bottom: 0.3rem;
+        }
+
+        .spec-sidebar h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0.5rem 0 0.2rem;
+        }
+
+        .author-meta {
+            font-size: 0.8rem;
+            color: #4a627a;
+            margin-bottom: 0.8rem;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.4rem;
+        }
+
+        .toc-list a {
+            text-decoration: none;
+            font-size: 0.8rem;
+            color: #3a4a5c;
+            display: block;
+            padding: 0.2rem 0;
+            border-left: 2px solid transparent;
+            transition: 0.1s;
+        }
+
+        .toc-list a:hover {
+            border-left-color: #8f9eae;
+            padding-left: 0.4rem;
+            color: #000;
+        }
+
+        /* MAIN: IEEE paper style (two-column text? no, single column but structured) */
+        .main-paper {
+            padding: 2.5rem 2.8rem 4rem;
+        }
+
+        .paper-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            font-family: 'Merriweather', serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .paper-sub {
+            font-size: 1rem;
+            color: #5a6e7c;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .author-line {
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .abstract {
+            background: #fafaf8;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid #cbd5e1;
+            margin: 1.2rem 0;
+            font-size: 0.9rem;
+            font-family: 'Merriweather', serif;
+        }
+
+        .section {
+            margin: 1.8rem 0 1.5rem;
+            scroll-margin-top: 1rem;
+        }
+
+        .section h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Merriweather', serif;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem;
+            color: #2c3e50;
+        }
+
+        .section p, .section li {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 0.6rem;
+        }
+
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+
+        .spec-table td, .spec-table th {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.6rem 0.4rem 0.6rem 0;
+            vertical-align: top;
+        }
+
+        .spec-table th {
+            font-weight: 700;
+            text-align: left;
+        }
+
+        .code-block {
+            background: #f5f7fb;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0.9rem;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .yaml-block {
+            background: #f5f7fb;
+            padding: 0.8rem;
+            border-left: 3px solid #9aaebf;
+            font-family: monospace;
+            font-size: 0.75rem;
+        }
+
+        .footnote {
+            font-size: 0.7rem;
+            color: #6b7c93;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .badge-ieee {
+            font-size: 0.65rem;
+            background: #eef2f6;
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+            font-family: monospace;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 1.2rem 0;
+        }
+
+        @media (max-width: 900px) {
+            .ieee-container {
+                grid-template-columns: 1fr;
+            }
+            .spec-sidebar {
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="ieee-container">
+    <!-- LEFT SIDEBAR: TOC / metadata -->
+    <aside class="spec-sidebar">
+        <div><span class="doi-badge">DOI: 10.57967/hf/8853</span></div>
+        <h1>DFQS v1.0</h1>
+        <div class="author-meta">DeepSeek Flash Quantization Standard</div>
+        <div class="author-meta">Darshani Persadh · @persadian</div>
+
+        <h2>Navigation</h2>
+        <ul class="toc-list">
+            <li><a href="#abstract">Abstract</a></li>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#design">2. DFQS Design Objectives</a></li>
+            <li><a href="#implementation">3. Reference Implementation</a></li>
+            <li><a href="#positioning">4. Positioning Model</a></li>
+            <li><a href="#behavioral">5. Behavioral Specification</a></li>
+            <li><a href="#evaluation">6. Evaluation Framework</a></li>
+            <li><a href="#packaging">7. Packaging Procedure</a></li>
+            <li><a href="#deployment">8. Deployment Specs</a></li>
+            <li><a href="#hardware">9. Hardware Envelope</a></li>
+            <li><a href="#validation">10. Validation Status</a></li>
+            <li><a href="#efficiency">11. Environmental Efficiency</a></li>
+            <li><a href="#conclusion">12. Conclusion</a></li>
+            <li><a href="#references">References</a></li>
+        </ul>
+        <div style="margin-top: 1.5rem; font-size:0.7rem; color:#6f7885;">
+            <span>IEEE-style specification</span><br>
+            <span>DFQS-IQ1_S-XL</span>
+        </div>
+    </aside>
+
+    <!-- MAIN PAPER CONTENT (IEEE structure) -->
+    <main class="main-paper">
+        <h1 class="paper-title">DFQS v1.0: DeepSeek Flash Quantization Standard for Ultra-Low-Bit MoE Deployment</h1>
+        <div class="paper-sub">Reference Implementation: IQ1_S-XL · Author: Darshani Persadh (@persadian)<br>Affiliation: Independent Systems Architect · DOI: 10.57967/hf/8853</div>
+
+        <!-- Abstract -->
+        <div id="abstract" class="section">
+            <h2>Abstract</h2>
+            <div class="abstract">
+                DFQS (DeepSeek Flash Quantization Standard) defines a structured deployment and evaluation framework for ultra-low-bit Mixture-of-Experts (MoE) language models operating under constrained-memory inference environments. This paper introduces DFQS-IQ1_S-XL, a reference implementation based on DeepSeek-V4-Flash, quantized and deployed in a single-file GGUF format (61.6GB). The system targets CPU-feasible inference while maintaining deterministic routing behavior and long-context operational stability. DFQS formalizes deployment constraints, behavioral expectations, and evaluation interfaces for reproducible large-scale MoE inference under compression regimes beyond conventional quantization standards.
+            </div>
+        </div>
+
+        <!-- 1. Introduction -->
+        <div id="introduction" class="section">
+            <h2>1. Introduction</h2>
+            <p>Large-scale Mixture-of-Experts (MoE) models typically require GPU-intensive inference and high memory bandwidth. Existing quantization methods (Q4–Q8, FP8, and hybrid compression techniques) fail to consistently define stable deployment behavior under extreme compression.</p>
+            <p>DFQS introduces a standardized framework for:</p>
+            <ul style="margin-left:1.5rem;">
+                <li>ultra-low-bit MoE deployment</li>
+                <li>deterministic inference behavior under compression</li>
+                <li>CPU-feasible execution of large-scale models</li>
+                <li>reproducible evaluation across constrained systems</li>
+            </ul>
+        </div>
+
+        <!-- 2. DFQS Design Objectives -->
+        <div id="design" class="section">
+            <h2>2. DFQS Design Objectives</h2>
+            <p>DFQS is designed around four core objectives:</p>
+            <ol style="margin-left:1.5rem;">
+                <li><strong>Deterministic Execution:</strong> Ensure consistent inference behavior under constrained runtime conditions.</li>
+                <li><strong>Compression Stability:</strong> Maintain routing coherence in ultra-low-bit MoE configurations.</li>
+                <li><strong>CPU Feasibility:</strong> Enable inference without dependency on high-end GPU infrastructure.</li>
+                <li><strong>Reproducible Evaluation:</strong> Standardize benchmarking across models and hardware environments.</li>
+            </ol>
+        </div>
+
+        <!-- 3. DFQS-IQ1_S-XL Reference Implementation -->
+        <div id="implementation" class="section">
+            <h2>3. DFQS-IQ1_S-XL Reference Implementation</h2>
+            <p>DFQS-IQ1_S-XL is a concrete implementation of the DFQS standard.</p>
+            <h3>3.1 Model Specification</h3>
+            <table class="spec-table">
+                <tr><th>Property</th><th>Value</th></tr>
+                <tr><td>Architecture</td><td>Mixture-of-Experts (MoE)</td></tr>
+                <tr><td>Total Parameters</td><td>284B</td></tr>
+                <tr><td>Active Parameters</td><td>13B</td></tr>
+                <tr><td>Format</td><td>GGUF (single-file)</td></tr>
+                <tr><td>Size</td><td>61.6GB</td></tr>
+                <tr><td>Runtime</td><td>llama.cpp</td></tr>
+            </table>
+            <h3>3.2 Deployment Class</h3>
+            <p>IQ1_S-XL defines an ultra-low-bit compression boundary optimized for constrained-memory execution, CPU-first inference environments, and long-context reasoning stability.</p>
+        </div>
+
+        <!-- 4. DFQS Positioning Model -->
+        <div id="positioning" class="section">
+            <h2>4. DFQS Positioning Model</h2>
+            <p>DFQS defines a hierarchical compression spectrum:</p>
+            <div class="code-block" style="background:#fafaf8;">
+                FP16 / FP8 (Frontier Models)<br>
+                → Q4–Q6 (Production GGUF Systems)<br>
+                → IQ2 (Experimental Compression Layer)<br>
+                → <strong>DFQS-IQ1_S-XL (Reference Deployment Class)</strong>
+            </div>
+            <p>This positioning defines DFQS as a boundary layer between production quantization and experimental compression regimes.</p>
+        </div>
+
+        <!-- 5. Behavioral Specification -->
+        <div id="behavioral" class="section">
+            <h2>5. Behavioral Specification</h2>
+            <p>DFQS systems are defined by expected runtime behavior under compression constraints.</p>
+            <h3>5.1 Stable Properties</h3>
+            <table class="spec-table">
+                <tr><th>Property</th><th>Behavior</th></tr>
+                <tr><td>Routing Consistency</td><td>Stable under constrained inference</td></tr>
+                <tr><td>Deterministic Execution</td><td>Preserved across runtimes</td></tr>
+                <tr><td>CPU Feasibility</td><td>Supported</td></tr>
+                <tr><td>Expert Activation</td><td>Coherent under compression</td></tr>
+            </table>
+            <h3>5.2 Failure Modes</h3>
+            <p>- Context saturation → increased output variance<br>
+            - Token pressure → degraded routing precision<br>
+            - Memory saturation → latency spikes or truncation behavior</p>
+        </div>
+
+        <!-- 6. Evaluation Framework -->
+        <div id="evaluation" class="section">
+            <h2>6. Evaluation Framework</h2>
+            <p>DFQS defines a standardized evaluation interface for all compliant implementations.</p>
+            <h3>6.1 Required Metrics</h3>
+            <div class="yaml-block">
+                reasoning_score: float<br>
+                code_score: float<br>
+                context_stability_curve: list[float]<br>
+                cpu_tokens_per_sec: float<br>
+                failure_boundary_tokens: int
+            </div>
+            <h3>6.2 Evaluation Conditions</h3>
+            <p>All evaluations MUST be performed under CPU-only baseline (unless specified), llama.cpp runtime, standardized prompt sets, reproducible inference conditions.</p>
+            <h3>6.3 Evaluation Categories</h3>
+            <p>Reasoning (short + medium context), Code generation (llama.cpp prompts), Long-context stability (8K–64K degradation curve), CPU inference throughput benchmarks.</p>
+        </div>
+
+        <!-- 7. DFQS Packaging Procedure (Non-Normative) -->
+        <div id="packaging" class="section">
+            <h2>7. DFQS Packaging Procedure (Non-Normative)</h2>
+            <p>The IQ1_S-XL artifact uses a sequential merge process: shard ingestion, binary concatenation, GGUF header validation, post-validation cleanup. This procedure is implementation-specific and not part of DFQS compliance requirements.</p>
+        </div>
+
+        <!-- 8. Deployment Specifications -->
+        <div id="deployment" class="section">
+            <h2>8. Deployment Specifications</h2>
+            <h3>8.1 llama.cpp</h3>
+            <div class="code-block">
+                llama-server -hf persadian/DeepSeek-V4-Flash-IQ1_S-XL
+            </div>
+            <h3>8.2 Python</h3>
+            <div class="code-block">
+                from llama_cpp import Llama<br>
+                llm = Llama.from_pretrained(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;repo_id="persadian/DeepSeek-V4-Flash-IQ1_S-XL",<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;filename="DeepSeek-V4-Flash-IQ1_S-XL.gguf",<br>
+                )
+            </div>
+        </div>
+
+        <!-- 9. Hardware Envelope -->
+        <div id="hardware" class="section">
+            <h2>9. Hardware Envelope</h2>
+            <table class="spec-table">
+                <tr><th>Component</th><th>Minimum</th><th>Recommended</th></tr>
+                <tr><td>RAM</td><td>80GB</td><td>128GB</td></tr>
+                <tr><td>GPU VRAM</td><td>22GB</td><td>24GB+</td></tr>
+                <tr><td>Storage</td><td>60GB</td><td>150GB</td></tr>
+            </table>
+            <p>Note: CPU inference remains the primary execution mode.</p>
+        </div>
+
+        <!-- 10. Validation Status -->
+        <div id="validation" class="section">
+            <h2>10. Validation Status</h2>
+            <p>GGUF integrity: validated | Single-file structure: confirmed | llama.cpp compatibility: verified | CPU inference: operational</p>
+        </div>
+
+        <!-- 11. Environmental Efficiency Context -->
+        <div id="efficiency" class="section">
+            <h2>11. Environmental Efficiency Context</h2>
+            <p>DFQS compression reduces computational overhead compared to standard MoE deployments. This results in lower memory footprint, reduced inference energy consumption, and improved deployment accessibility in constrained environments.</p>
+        </div>
+<!-- Climate Action -->
+<script src="https://widgets.tree-nation.com/js/widgets/v3/widgets.min.js"></script>
+<div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+ <div 
+        data-widget-type="offset-website" 
+        data-tree-nation-code="1d8861a9666f981e" 
+        data-lang="en" 
+        data-theme="light">
+</div>
+
+<div 
+        data-widget-type="tree-counter" 
+        data-tree-nation-code="c313900f1518ce55" 
+        data-lang="en" 
+        data-theme="light">
+    </div>
+</div>
+<!-- End Climate Action -->
+        <!-- 12. Conclusion -->
+        <div id="conclusion" class="section">
+            <h2>12. Conclusion</h2>
+            <p>DFQS defines a structured deployment and evaluation standard for ultra-low-bit Mixture-of-Experts systems. DFQS-IQ1_S-XL serves as the reference implementation demonstrating feasibility of CPU-first, deterministic MoE inference under extreme compression constraints.</p>
+        </div>
+
+        <!-- References -->
+        <div id="references" class="section">
+            <h2>References</h2>
+            <p>Persadh, D.R. (2026). DFQS-IQ1_S-XL: Ultra-Low-Bit MoE Deployment Standard. Hugging Face. <span class="badge-ieee">DOI: 10.57967/hf/8853</span> <a href="#" style="text-decoration:none; color:#2c6e9e;">https://doi.org/10.57967/hf/8853</a></p>
+            <p>DeepSeek-AI. (2025). DeepSeek-V4-Flash: Technical Report.</p>
+            <p>llama.cpp contributors. (2025). GGUF format specification & MoE kernel optimizations.</p>
+            <div class="footnote">Manuscript received May 19, 2026; accepted for publication as IEEE-style specification.</div>
+        </div>
+        <hr>
+        <div style="text-align:center; font-size:0.7rem; color:#6f7885;">© 2026 Darshani Persadh. This work is released under MIT license. DFQS v1.0 – reference implementation IQ1_S-XL.</div>
+    </main>
+</div>
+
+<!-- optional: small script to make TOC links smooth -->
+<script>
+    document.querySelectorAll('.toc-list a, .section a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId !== '#') {
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>
